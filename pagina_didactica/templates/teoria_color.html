@@ -1,0 +1,415 @@
+{% extends "base.html" %}
+{% block title %}Teoría del Color{% endblock %}
+
+{% block content %}
+  <!-- ... (mantén todo el contenido anterior hasta la sección del juego) ... -->
+
+    <section class="game-section">
+      <div class="container">
+        <h2 class="section-title">¡Juego de Memoria: Colores y Emociones! 🎮</h2>
+        <p class="section-description">Encuentra las parejas de colores y las emociones que representan. ¡Pon a prueba tu memoria y aprende al mismo tiempo!</p>
+        
+        <div class="memory-game-container">
+          <div class="memory-stats">
+            <div class="memory-stat">
+              <i class="fas fa-sync-alt"></i> Intentos: <span id="attempts">0</span>
+            </div>
+            <div class="memory-stat">
+              <i class="fas fa-clock"></i> Tiempo: <span id="time">00:00</span>
+            </div>
+            <div class="memory-stat">
+              <i class="fas fa-trophy"></i> Parejas: <span id="pairs">0</span>/6
+            </div>
+            <button id="reset-game" class="game-button">
+              <i class="fas fa-redo"></i> Reiniciar
+            </button>
+          </div>
+          
+          <div class="memory-board" id="memory-board">
+            <!-- Las cartas se generarán automáticamente -->
+          </div>
+          
+          <div class="game-complete" id="game-complete" style="display: none;">
+            <h3>¡Felicidades! 🎉</h3>
+            <p>Has completado el juego en <span id="final-time">00:00</span> con <span id="final-attempts">0</span> intentos.</p>
+            <button id="play-again" class="game-button">
+              <i class="fas fa-redo"></i> Jugar de nuevo
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <!-- ... (mantén el resto del contenido) ... -->
+
+  <style>
+    /* Estilos para el juego de memoria */
+    .memory-game-container {
+      margin: 2rem auto;
+      max-width: 800px;
+      background-color: white;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .memory-stats {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    .memory-stat {
+      background-color: #f8f9fa;
+      padding: 0.8rem 1.2rem;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .memory-board {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      perspective: 1000px;
+    }
+    
+    @media (max-width: 768px) {
+      .memory-board {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .memory-board {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    .memory-card {
+      height: 100px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.5s;
+      cursor: pointer;
+      border-radius: 10px;
+    }
+    
+    .memory-card.flipped {
+      transform: rotateY(180deg);
+    }
+    
+    .memory-card.matched {
+      transform: rotateY(180deg);
+      cursor: default;
+      box-shadow: 0 0 15px rgba(40, 167, 69, 0.5);
+    }
+    
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card-front {
+      background: linear-gradient(135deg, #5a9bff, #3a7bd5);
+      color: white;
+    }
+    
+    .card-front i {
+      font-size: 1.5rem;
+    }
+    
+    .card-back {
+      background-color: white;
+      transform: rotateY(180deg);
+      padding: 0.5rem;
+      text-align: center;
+      overflow: hidden;
+    }
+    
+    .card-back.color-card {
+      color: white;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+    
+    .card-back.emotion-card {
+      color: #333;
+      font-size: 0.9rem;
+      padding: 0.8rem;
+    }
+    
+    .game-button {
+      background: linear-gradient(135deg, #5a9bff, #3a7bd5);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .game-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(58, 123, 213, 0.4);
+    }
+    
+    .game-complete {
+      text-align: center;
+      padding: 2rem;
+      background-color: #f8f9fa;
+      border-radius: 15px;
+      margin-top: 1.5rem;
+      animation: fadeIn 0.5s ease-out;
+    }
+    
+    .game-complete h3 {
+      color: #28a745;
+      margin-bottom: 1rem;
+    }
+    
+    .game-complete p {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Pares de colores y emociones (reducido a 6 para mejor experiencia)
+      const colorPairs = [
+        { color: '#FF0000', name: 'Rojo', emotion: 'Pasión y energía' },
+        { color: '#0000FF', name: 'Azul', emotion: 'Tranquilidad' },
+        { color: '#008000', name: 'Verde', emotion: 'Naturaleza' },
+        { color: '#FFFF00', name: 'Amarillo', emotion: 'Alegría' },
+        { color: '#FFA500', name: 'Naranja', emotion: 'Entusiasmo' },
+        { color: '#800080', name: 'Morado', emotion: 'Creatividad' }
+      ];
+      
+      let gameState = {
+        hasFlippedCard: false,
+        lockBoard: false,
+        firstCard: null,
+        secondCard: null,
+        attempts: 0,
+        pairsFound: 0,
+        timer: null,
+        seconds: 0
+      };
+      
+      // Inicializar el juego
+      function initGame() {
+        clearInterval(gameState.timer);
+        gameState = {
+          hasFlippedCard: false,
+          lockBoard: false,
+          firstCard: null,
+          secondCard: null,
+          attempts: 0,
+          pairsFound: 0,
+          timer: null,
+          seconds: 0
+        };
+        
+        document.getElementById('attempts').textContent = '0';
+        document.getElementById('pairs').textContent = '0';
+        document.getElementById('time').textContent = '00:00';
+        document.getElementById('game-complete').style.display = 'none';
+        document.getElementById('memory-board').style.display = 'grid';
+        
+        createMemoryBoard();
+        startTimer();
+      }
+      
+      // Crear el tablero de juego
+      function createMemoryBoard() {
+        const memoryBoard = document.getElementById('memory-board');
+        memoryBoard.innerHTML = '';
+        
+        // Crear un mazo con colores y emociones
+        const deck = [];
+        colorPairs.forEach(pair => {
+          // Añadir carta de color
+          deck.push({
+            type: 'color',
+            color: pair.color,
+            name: pair.name,
+            pairId: pair.name
+          });
+          
+          // Añadir carta de emoción
+          deck.push({
+            type: 'emotion',
+            emotion: pair.emotion,
+            pairId: pair.name
+          });
+        });
+        
+        // Barajar el mazo
+        const shuffledDeck = [...deck].sort(() => 0.5 - Math.random());
+        
+        // Crear las cartas en el DOM
+        shuffledDeck.forEach((card, index) => {
+          const cardElement = document.createElement('div');
+          cardElement.className = 'memory-card';
+          cardElement.dataset.pairId = card.pairId;
+          cardElement.dataset.index = index;
+          
+          const cardFront = document.createElement('div');
+          cardFront.className = 'card-front';
+          cardFront.innerHTML = '<i class="fas fa-question"></i>';
+          
+          const cardBack = document.createElement('div');
+          cardBack.className = `card-back ${card.type}-card`;
+          
+          if (card.type === 'color') {
+            cardBack.style.backgroundColor = card.color;
+            cardBack.innerHTML = `<span>${card.name}</span>`;
+          } else {
+            cardBack.innerHTML = `<span>${card.emotion}</span>`;
+          }
+          
+          cardElement.appendChild(cardFront);
+          cardElement.appendChild(cardBack);
+          cardElement.addEventListener('click', flipCard);
+          memoryBoard.appendChild(cardElement);
+        });
+      }
+      
+      // Voltear una carta
+      function flipCard() {
+        if (gameState.lockBoard) return;
+        if (this === gameState.firstCard) return;
+        if (this.classList.contains('matched')) return;
+        
+        this.classList.add('flipped');
+        
+        if (!gameState.hasFlippedCard) {
+          // Primer clic
+          gameState.hasFlippedCard = true;
+          gameState.firstCard = this;
+          return;
+        }
+        
+        // Segundo clic
+        gameState.secondCard = this;
+        gameState.attempts++;
+        document.getElementById('attempts').textContent = gameState.attempts;
+        
+        checkForMatch();
+      }
+      
+      // Comprobar si las cartas coinciden
+      function checkForMatch() {
+        const isMatch = gameState.firstCard.dataset.pairId === gameState.secondCard.dataset.pairId;
+        
+        if (isMatch) {
+          disableCards();
+        } else {
+          unflipCards();
+        }
+      }
+      
+      // Deshabilitar cartas coincidentes
+      function disableCards() {
+        gameState.firstCard.classList.add('matched');
+        gameState.secondCard.classList.add('matched');
+        
+        gameState.firstCard.removeEventListener('click', flipCard);
+        gameState.secondCard.removeEventListener('click', flipCard);
+        
+        gameState.pairsFound++;
+        document.getElementById('pairs').textContent = gameState.pairsFound;
+        
+        resetBoard();
+        
+        // Comprobar si el juego ha terminado
+        if (gameState.pairsFound === colorPairs.length) {
+          endGame();
+        }
+      }
+      
+      // Voltear cartas que no coinciden
+      function unflipCards() {
+        gameState.lockBoard = true;
+        
+        setTimeout(() => {
+          gameState.firstCard.classList.remove('flipped');
+          gameState.secondCard.classList.remove('flipped');
+          
+          resetBoard();
+        }, 1000);
+      }
+      
+      // Reiniciar el tablero después de cada turno
+      function resetBoard() {
+        [gameState.hasFlippedCard, gameState.lockBoard] = [false, false];
+        [gameState.firstCard, gameState.secondCard] = [null, null];
+      }
+      
+      // Iniciar temporizador
+      function startTimer() {
+        clearInterval(gameState.timer);
+        gameState.seconds = 0;
+        updateTimerDisplay();
+        
+        gameState.timer = setInterval(() => {
+          gameState.seconds++;
+          updateTimerDisplay();
+        }, 1000);
+      }
+      
+      // Actualizar visualización del temporizador
+      function updateTimerDisplay() {
+        const minutes = Math.floor(gameState.seconds / 60);
+        const seconds = gameState.seconds % 60;
+        document.getElementById('time').textContent = 
+          `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      }
+      
+      // Finalizar el juego
+      function endGame() {
+        clearInterval(gameState.timer);
+        
+        // Mostrar resultados finales
+        document.getElementById('final-time').textContent = 
+          document.getElementById('time').textContent;
+        document.getElementById('final-attempts').textContent = gameState.attempts;
+        
+        // Ocultar tablero y mostrar pantalla de finalización
+        document.getElementById('memory-board').style.display = 'none';
+        document.getElementById('game-complete').style.display = 'block';
+      }
+      
+      // Event listeners
+      document.getElementById('reset-game').addEventListener('click', initGame);
+      document.getElementById('play-again').addEventListener('click', initGame);
+      
+      // Iniciar el juego al cargar la página
+      initGame();
+    });
+  </script>
+{% endblock %}

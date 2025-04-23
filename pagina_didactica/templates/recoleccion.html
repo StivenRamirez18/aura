@@ -1,0 +1,272 @@
+{% extends "base.html" %}
+{% block title %}Recolección de Datos{% endblock %}
+
+{% block content %}
+  <div class="topic-header data-header">
+    <h2>📊 Recolección de Datos 📊</h2>
+    <p>¡Aprende cómo obtener información importante para tus programas!</p>
+  </div>
+
+  <div class="topic-content">
+    <section class="info-section">
+      <h3>¿Qué es la Recolección de Datos?</h3>
+      <p>La recolección de datos es como juntar pistas para resolver un misterio. Cuando creamos programas, necesitamos saber qué quieren y necesitan los usuarios. Para eso, recolectamos información de diferentes maneras.</p>
+      
+      <div class="data-intro">
+        <img src="{{ url_for('static', filename='images/data_collection.png') }}" alt="Recolección de datos" class="data-image">
+        <p>Recolectar datos nos ayuda a crear mejores programas para los usuarios.</p>
+      </div>
+    </section>
+
+    <section class="info-section">
+      <h3>Métodos de Recolección de Datos</h3>
+      <p>Hay muchas formas de obtener información. Aquí te mostramos las más importantes:</p>
+      
+      <div class="methods-container">
+        <div class="method-card">
+          <div class="method-icon">
+            <i class="fas fa-clipboard-list fa-3x"></i>
+          </div>
+          <h4>Encuestas</h4>
+          <p>Son como cuestionarios donde hacemos preguntas a muchas personas para conocer sus opiniones.</p>
+          <div class="method-example">
+            <img src="{{ url_for('static', filename='images/survey.png') }}" alt="Ejemplo de encuesta">
+          </div>
+        </div>
+        
+        <div class="method-card">
+          <div class="method-icon">
+            <i class="fas fa-comments fa-3x"></i>
+          </div>
+          <h4>Entrevistas</h4>
+          <p>Conversaciones donde hacemos preguntas detalladas a una persona para entender mejor sus necesidades.</p>
+          <div class="method-example">
+            <img src="{{ url_for('static', filename='images/interview.png') }}" alt="Ejemplo de entrevista">
+          </div>
+        </div>
+        
+        <div class="method-card">
+          <div class="method-icon">
+            <i class="fas fa-users fa-3x"></i>
+          </div>
+          <h4>Grupos Focales</h4>
+          <p>Reuniones con varias personas donde todos hablan sobre un tema y comparten ideas.</p>
+          <div class="method-example">
+            <img src="{{ url_for('static', filename='images/focus_group.png') }}" alt="Ejemplo de grupo focal">
+          </div>
+        </div>
+        
+        <div class="method-card">
+          <div class="method-icon">
+            <i class="fas fa-eye fa-3x"></i>
+          </div>
+          <h4>Observación</h4>
+          <p>Miramos cómo las personas usan programas similares para entender qué les gusta y qué no.</p>
+          <div class="method-example">
+            <img src="{{ url_for('static', filename='images/observation.png') }}" alt="Ejemplo de observación">
+          </div>
+        </div>
+        
+        <div class="method-card">
+          <div class="method-icon">
+            <i class="fas fa-chart-bar fa-3x"></i>
+          </div>
+          <h4>Análisis de Datos</h4>
+          <p>Estudiamos números y estadísticas para descubrir patrones y tendencias.</p>
+          <div class="method-example">
+            <img src="{{ url_for('static', filename='images/data_analysis.png') }}" alt="Ejemplo de análisis">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="info-section">
+      <h3>¿Por qué es importante recolectar datos?</h3>
+      <div class="importance-container">
+        <div class="importance-item">
+          <i class="fas fa-bullseye"></i>
+          <h4>Conocer a los usuarios</h4>
+          <p>Nos ayuda a entender quiénes usarán nuestro programa y qué necesitan.</p>
+        </div>
+        
+        <div class="importance-item">
+          <i class="fas fa-lightbulb"></i>
+          <h4>Tener mejores ideas</h4>
+          <p>Con información real, podemos crear soluciones que realmente funcionen.</p>
+        </div>
+        
+        <div class="importance-item">
+          <i class="fas fa-check-circle"></i>
+          <h4>Tomar decisiones correctas</h4>
+          <p>Los datos nos ayudan a decidir qué características incluir en nuestro programa.</p>
+        </div>
+        
+        <div class="importance-item">
+          <i class="fas fa-bug"></i>
+          <h4>Encontrar problemas</h4>
+          <p>Podemos descubrir qué cosas no funcionan bien antes de terminar el programa.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="interactive-section">
+      <h3>¡Crea tu propia encuesta!</h3>
+      <div class="survey-creator">
+        <div class="survey-preview">
+          <h4>Vista previa de tu encuesta</h4>
+          <div class="survey-title">
+            <p><strong>Título:</strong> <span id="preview-title">Mi Encuesta</span></p>
+          </div>
+          <div class="survey-questions" id="survey-questions">
+            <!-- Las preguntas se agregarán aquí -->
+            <div class="preview-question">
+              <p><strong>Pregunta 1:</strong> ¿Cuál es tu color favorito?</p>
+              <div class="preview-options">
+                <label><input type="radio" name="q1"> Rojo</label>
+                <label><input type="radio" name="q1"> Azul</label>
+                <label><input type="radio" name="q1"> Verde</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="survey-controls">
+          <h4>Crea tu encuesta</h4>
+          <div class="control-group">
+            <label for="survey-title">Título de la encuesta:</label>
+            <input type="text" id="survey-title" value="Mi Encuesta">
+          </div>
+          
+          <div class="control-group">
+            <label for="question-text">Nueva pregunta:</label>
+            <input type="text" id="question-text" placeholder="Escribe tu pregunta aquí">
+          </div>
+          
+          <div class="control-group">
+            <label>Opciones de respuesta:</label>
+            <div class="option-inputs">
+              <input type="text" class="option-input" placeholder="Opción 1">
+              <input type="text" class="option-input" placeholder="Opción 2">
+              <input type="text" class="option-input" placeholder="Opción 3">
+            </div>
+          </div>
+          
+          <button id="add-question-btn">Agregar pregunta</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="quiz-section">
+      <h3>¡Pon a prueba tus conocimientos!</h3>
+      <div class="quiz-container">
+        <div class="quiz-question">
+          <p>¿Qué método de recolección de datos es mejor para obtener opiniones de muchas personas rápidamente?</p>
+          <div class="quiz-options">
+            <button class="quiz-option" data-correct="true">Encuestas</button>
+            <button class="quiz-option" data-correct="false">Entrevistas</button>
+            <button class="quiz-option" data-correct="false">Observación</button>
+            <button class="quiz-option" data-correct="false">Grupos focales</button>
+          </div>
+          <p class="quiz-feedback"></p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Quiz functionality
+    const quizOptions = document.querySelectorAll('.quiz-option');
+    const quizFeedback = document.querySelector('.quiz-feedback');
+
+    quizOptions.forEach(option => {
+      option.addEventListener('click', function() {
+        quizOptions.forEach(btn => btn.disabled = true);
+        
+        if (this.dataset.correct === 'true') {
+          this.classList.add('correct');
+          quizFeedback.textContent = '¡Correcto! ¡Muy bien!';
+          quizFeedback.style.color = '#4CAF50';
+        } else {
+          this.classList.add('incorrect');
+          quizFeedback.textContent = 'Incorrecto. Intenta de nuevo.';
+          quizFeedback.style.color = '#F44336';
+          
+          // Highlight the correct answer
+          quizOptions.forEach(btn => {
+            if (btn.dataset.correct === 'true') {
+              btn.classList.add('correct');
+            }
+          });
+        }
+      });
+    });
+
+    // Survey creator functionality
+    const surveyTitle = document.getElementById('survey-title');
+    const previewTitle = document.getElementById('preview-title');
+    const questionText = document.getElementById('question-text');
+    const optionInputs = document.querySelectorAll('.option-input');
+    const addQuestionBtn = document.getElementById('add-question-btn');
+    const surveyQuestions = document.getElementById('survey-questions');
+    
+    let questionCount = 1;
+
+    surveyTitle.addEventListener('input', function() {
+      previewTitle.textContent = this.value;
+    });
+
+    addQuestionBtn.addEventListener('click', function() {
+      const question = questionText.value.trim();
+      if (!question) {
+        alert('Por favor, escribe una pregunta');
+        return;
+      }
+      
+      let options = [];
+      optionInputs.forEach(input => {
+        const option = input.value.trim();
+        if (option) {
+          options.push(option);
+        }
+      });
+      
+      if (options.length < 2) {
+        alert('Por favor, agrega al menos dos opciones');
+        return;
+      }
+      
+      questionCount++;
+      
+      // Create preview question
+      const previewQuestion = document.createElement('div');
+      previewQuestion.className = 'preview-question';
+      
+      const questionTitle = document.createElement('p');
+      questionTitle.innerHTML = `<strong>Pregunta ${questionCount}:</strong> ${question}`;
+      previewQuestion.appendChild(questionTitle);
+      
+      const previewOptions = document.createElement('div');
+      previewOptions.className = 'preview-options';
+      
+      options.forEach(option => {
+        const label = document.createElement('label');
+        const radio = document.createElement('input');
+        radio.type = 'radio';
+        radio.name = `q${questionCount}`;
+        
+        label.appendChild(radio);
+        label.appendChild(document.createTextNode(` ${option}`));
+        previewOptions.appendChild(label);
+      });
+      
+      previewQuestion.appendChild(previewOptions);
+      surveyQuestions.appendChild(previewQuestion);
+      
+      // Reset inputs
+      questionText.value = '';
+      optionInputs.forEach(input => {
+        input.value = '';
+      });
+    });
+  </script>
+{% endblock %}

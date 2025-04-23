@@ -1,0 +1,38 @@
+/* Estilos para la sopa de letras */
+.sopa-letras {
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.sopa-letras td {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Estilos para celdas seleccionadas temporalmente */
+.seleccionada {
+    background-color: #ffeb3b;
+}
+
+/* Estilo para palabras encontradas en la lista */
+.tachado {
+    text-decoration: line-through;
+    color: #888;
+    font-style: italic;
+}
+
+/* Estilo para celdas con palabras encontradas */
+.encontrada {
+    background-color: #4caf50;
+    color: white;
+}
+
+/* Ocultar el botón de verificar inicialmente */
+#verificar-btn {
+    display: none;
+    margin-top: 20px;
+}

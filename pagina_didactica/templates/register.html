@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrarse - Página Didáctica</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="auth-page">
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h1>🌟 ¡Únete a nosotros! 🌟</h1>
+        <h2>Crea tu cuenta de aprendizaje</h2>
+      </div>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="flash-messages">
+            {% for category, message in messages %}
+              <div class="flash-message {{ category }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      <form method="POST" action="/register" class="auth-form">
+        <div class="form-group">
+          <label for="nombre"><i class="fas fa-id-card"></i> Nombre completo:</label>
+          <input type="text" id="nombre" name="nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="usuario"><i class="fas fa-user"></i> Nombre de usuario:</label>
+          <input type="text" id="usuario" name="usuario" required>
+        </div>
+        <div class="form-group">
+          <label for="contraseña"><i class="fas fa-lock"></i> Contraseña:</label>
+          <input type="password" id="contraseña" name="contraseña" required>
+        </div>
+        <button type="submit" class="auth-button">¡Registrarme! <i class="fas fa-paper-plane"></i></button>
+      </form>
+      
+      <div class="auth-footer">
+        <p>¿Ya tienes cuenta? <a href="/login">¡Inicia sesión aquí!</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    setTimeout(function() {
+      const flashMessages = document.querySelectorAll('.flash-message');
+      flashMessages.forEach(function(message) {
+        message.style.opacity = '0';
+        setTimeout(function() {
+          message.style.display = 'none';
+        }, 500);
+      });
+    }, 3000);
+  </script>
+</body>
+</html>

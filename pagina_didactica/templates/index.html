@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<div class="welcome-section">
+    <h1>¡Bienvenido a tu Aventura de Programación! 🚀</h1>
+    <p>Aprende conceptos de diseño de interfaces de manera divertida e interactiva</p>
+    
+    {% if 'nombre_usuario' in session %}
+    <div class="welcome-message">
+        <h2>¡Hola, {{ session['nombre_usuario'] }}! 👋</h2>
+        <p>¿Qué quieres aprender hoy?</p>
+    </div>
+    {% else %}
+    <div class="welcome-message">
+        <h2>¡Únete a nuestra aventura! 🎮</h2>
+        <p>Regístrate o inicia sesión para comenzar a aprender</p>
+        <div class="auth-buttons">
+            <a href="/login" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</a>
+            <a href="/register" class="btn btn-secondary"><i class="fas fa-user-plus"></i> Registrarse</a>
+        </div>
+    </div>
+    {% endif %}
+    
+    <div class="topics-grid">
+        <div class="topic-card color-card">
+            <div class="topic-icon"><i class="fas fa-palette"></i></div>
+            <h2>Teoría del Color</h2>
+            <p>Descubre el mundo mágico de los colores y cómo usarlos en tus programas</p>
+            <a href="/teoria_color" class="topic-link">Explorar <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="topic-card gestalt-card">
+            <div class="topic-icon"><i class="fas fa-puzzle-piece"></i></div>
+            <h2>Leyes de Gestalt</h2>
+            <p>Aprende cómo nuestro cerebro organiza lo que vemos</p>
+            <a href="/gestalt" class="topic-link">Explorar <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="topic-card nielsen-card">
+            <div class="topic-icon"><i class="fas fa-lightbulb"></i></div>
+            <h2>Principios de Nielsen</h2>
+            <p>Descubre las 10 reglas para hacer aplicaciones fáciles de usar</p>
+            <a href="/nielsen" class="topic-link">Explorar <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="topic-card data-card">
+            <div class="topic-icon"><i class="fas fa-chart-bar"></i></div>
+            <h2>Recolección de Datos</h2>
+            <p>Aprende a obtener información importante para tus programas</p>
+            <a href="/recoleccion" class="topic-link">Explorar <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="topic-card wireframe-card">
+            <div class="topic-icon"><i class="fas fa-pencil-ruler"></i></div>
+            <h2>Wireframes</h2>
+            <p>Aprende a dibujar tus ideas antes de programarlas</p>
+            <a href="/wireframes" class="topic-link">Explorar <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="fun-facts-section">
+    <h2>¿Sabías que...? 🤔</h2>
+    <div class="facts-container">
+        <div class="fact-card">
+            <i class="fas fa-paint-brush fact-icon"></i>
+            <p>Los colores pueden cambiar cómo te sientes cuando usas un programa.</p>
+        </div>
+        <div class="fact-card">
+            <i class="fas fa-eye fact-icon"></i>
+            <p>Tu cerebro agrupa cosas similares automáticamente gracias a las leyes de Gestalt.</p>
+        </div>
+        <div class="fact-card">
+            <i class="fas fa-mouse-pointer fact-icon"></i>
+            <p>Un buen diseño hace que los usuarios cometan menos errores.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
