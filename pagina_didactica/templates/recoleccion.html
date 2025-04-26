@@ -1,0 +1,1612 @@
+{% extends "base.html" %}
+{% block title %}Recolección de Datos{% endblock %}
+
+{% block content %}
+  <!-- Back to top button -->
+  <button id="backToTop" class="back-to-top" aria-label="Volver arriba">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+  <div class="topic-header data-header">
+    <h2 class="animate-title">📊 Recolección de Datos 📊</h2>
+  </div>
+
+  <div class="topic-content">
+    <section class="info-section fade-in">
+      <h3>¿Qué es la Recolección de Datos?</h3>
+      <p class="highlight-text">La recolección de datos es como juntar pistas para resolver un misterio. Cuando creamos programas, necesitamos saber qué quieren y necesitan los usuarios. Para eso, recolectamos información de diferentes maneras.</p>
+      
+      <div class="data-intro hover-effect">
+        <img src="{{ url_for('static', filename='images/recolecciondatos.jpg') }}" alt="Recolección de datos" class="data-image pulse">
+        <p class="caption">Recolectar datos nos ayuda a crear mejores programas para los usuarios.</p>
+      </div>
+    </section>
+
+    <section class="info-section methods-section">
+      <h3 class="section-title">Métodos de Recolección de Datos</h3>
+      <p class="section-intro">Hay muchas formas de obtener información. Aquí te mostramos las más importantes:</p>
+      
+      <div class="methods-container">
+        <div class="method-card">
+          <div class="method-icon">
+            <i class="fas fa-clipboard-list fa-3x"></i>
+          </div>
+          <h4>Encuestas</h4>
+          <p>Son como cuestionarios donde hacemos preguntas a muchas personas para conocer sus opiniones.</p>
+          <div class="method-example">
+            <img src="{{ url_for('static', filename='images/gifs/ENCUESTA.gif') }}" alt="Ejemplo de encuesta" class="method-gif">
+        </div>
+          </div>
+        </div>
+        
+        <div class="method-card">
+          <div class="method-icon">
+            <i class="fas fa-comments fa-3x"></i>
+          </div>
+          <h4>Entrevistas</h4>
+          <p>Conversaciones donde hacemos preguntas detalladas a una persona para entender mejor sus necesidades.</p>
+          <div class="method-example">
+            <img src="{{ url_for('static', filename='images/gifs/entrevistas.gif') }}" alt="Ejemplo de entrevista" class="method-gif">
+        </div>
+          </div>
+        </div>
+        
+        <div class="method-card">
+          <div class="method-icon">
+            <i class="fas fa-users fa-3x"></i>
+          </div>
+          <h4>Grupos Focales</h4>
+          <p>Reuniones con varias personas donde todos hablan sobre un tema y comparten ideas.</p>
+          <div class="method-example">
+            <img src="{{ url_for('static', filename='images/gifs/grupos_focales.gif') }}" alt="Ejemplo de grupo focal" class="method-gif">
+        </div>
+          </div>
+        </div>
+        
+        <div class="method-card">
+          <div class="method-icon">
+            <i class="fas fa-eye fa-3x"></i>
+          </div>
+          <h4>Observación</h4>
+          <p>Miramos cómo las personas usan programas similares para entender qué les gusta y qué no.</p>
+          <div class="method-example">
+            <img src="{{ url_for('static', filename='images/gifs/observacion.gif') }}" alt="Ejemplo de observación" class="method-gif">
+        </div>
+          </div>
+        </div>
+        
+        <div class="method-card">
+          <div class="method-icon">
+            <i class="fas fa-chart-bar fa-3x"></i>
+          </div>
+          <h4>Análisis de Datos</h4>
+          <p>Estudiamos números y estadísticas para descubrir patrones y tendencias.</p>
+          <div class="method-example">
+            <img src="{{ url_for('static', filename='images/gifs/analisis_datos.gif') }}" alt="Ejemplo de análisis" class="method-gif">
+        </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="info-section importance-section">
+      <h3 class="section-title">¿Por qué es importante recolectar datos?</h3>
+      <div class="importance-container">
+        <div class="importance-item">
+          <i class="fas fa-bullseye"></i>
+          <h4>Conocer a los usuarios</h4>
+          <p>Nos ayuda a entender quiénes usarán nuestro programa y qué necesitan.</p>
+        </div>
+        
+        <div class="importance-item">
+          <i class="fas fa-lightbulb"></i>
+          <h4>Tener mejores ideas</h4>
+          <p>Con información real, podemos crear soluciones que realmente funcionen.</p>
+        </div>
+        
+        <div class="importance-item">
+          <i class="fas fa-check-circle"></i>
+          <h4>Tomar decisiones correctas</h4>
+          <p>Los datos nos ayudan a decidir qué características incluir en nuestro programa.</p>
+        </div>
+        
+        <div class="importance-item">
+          <i class="fas fa-bug"></i>
+          <h4>Encontrar problemas</h4>
+          <p>Podemos descubrir qué cosas no funcionan bien antes de terminar el programa.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="interactive-section">
+      <h3 class="section-title">¡Crea tu propia encuesta!</h3>
+      <div class="survey-creator card-shadow">
+        <div class="survey-preview">
+          <h4 class="preview-title">Vista previa de tu encuesta</h4>
+          <div class="survey-title card">
+            <p><strong>Título:</strong> <span id="preview-title" class="editable">Mi Encuesta</span></p>
+          </div>
+          <div class="survey-questions" id="survey-questions">
+            <!-- Las preguntas se agregarán aquí -->
+          </div>
+        </div>
+        
+        <div class="survey-controls">
+          <h4 class="controls-title">Crea tu encuesta</h4>
+          <div class="control-group">
+            <label for="survey-title" class="form-label">Título de la encuesta:</label>
+            <input type="text" id="survey-title" class="form-input" value="Mi Encuesta">
+          </div>
+          
+          <div class="control-group">
+            <label for="question-text" class="form-label">Nueva pregunta:</label>
+            <input type="text" id="question-text" class="form-input" placeholder="Escribe tu pregunta aquí">
+            
+            <label class="form-label">Tipo de pregunta:</label>
+            <select id="question-type" class="form-input">
+              <option value="multiple">Opción múltiple</option>
+              <option value="text">Texto libre</option>
+              <option value="rating">Calificación</option>
+            </select>
+          </div>
+          
+          <div class="control-group" id="options-group">
+            <label class="form-label">Opciones de respuesta:</label>
+            <div class="option-inputs">
+              <input type="text" class="option-input form-input" placeholder="Opción 1">
+              <input type="text" class="option-input form-input" placeholder="Opción 2">
+              <input type="text" class="option-input form-input" placeholder="Opción 3">
+              <button class="add-option-btn" id="add-option-btn">+ Agregar opción</button>
+            </div>
+          </div>
+          
+          <div class="survey-actions">
+            <button id="add-question-btn" class="primary-button">Agregar pregunta</button>
+            <button id="save-survey-btn" class="secondary-button">Guardar encuesta</button>
+            
+    <button id="view-survey-btn" class="view-button" onclick="window.location.href='encuesta'" disabled>Ver Encuesta</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quiz-section">
+      <h3 class="section-title">¡Pon a prueba tus conocimientos!</h3>
+      <div class="quiz-container card-shadow">
+        <div class="quiz-questions">
+          <!-- Pregunta 1 -->
+          <div class="quiz-question" data-question="1">
+            <p class="question-text">¿Qué método de recolección de datos es mejor para obtener opiniones de muchas personas rápidamente?</p>
+            <div class="quiz-options">
+              <button class="quiz-option animate-hover" data-correct="true">Encuestas</button>
+              <button class="quiz-option animate-hover" data-correct="false">Entrevistas</button>
+              <button class="quiz-option animate-hover" data-correct="false">Observación</button>
+              <button class="quiz-option animate-hover" data-correct="false">Grupos focales</button>
+            </div>
+          </div>
+
+          <!-- Pregunta 2 -->
+          <div class="quiz-question" data-question="2" style="display: none;">
+            <p class="question-text">¿Cuál es el propósito principal de los grupos focales?</p>
+            <div class="quiz-options">
+              <button class="quiz-option animate-hover" data-correct="false">Recolectar datos estadísticos</button>
+              <button class="quiz-option animate-hover" data-correct="true">Obtener opiniones detalladas en grupo</button>
+              <button class="quiz-option animate-hover" data-correct="false">Hacer pruebas de usabilidad</button>
+              <button class="quiz-option animate-hover" data-correct="false">Analizar datos históricos</button>
+            </div>
+          </div>
+
+          <!-- Pregunta 3 -->
+          <div class="quiz-question" data-question="3" style="display: none;">
+            <p class="question-text">¿Qué método es más adecuado cuando necesitas información muy detallada de una persona?</p>
+            <div class="quiz-options">
+              <button class="quiz-option animate-hover" data-correct="false">Encuestas</button>
+              <button class="quiz-option animate-hover" data-correct="true">Entrevistas</button>
+              <button class="quiz-option animate-hover" data-correct="false">Análisis de datos</button>
+              <button class="quiz-option animate-hover" data-correct="false">Observación</button>
+            </div>
+          </div>
+
+          <!-- Pregunta 4 -->
+          <div class="quiz-question" data-question="4" style="display: none;">
+            <p class="question-text">¿Cuál es la ventaja principal del método de observación?</p>
+            <div class="quiz-options">
+              <button class="quiz-option animate-hover" data-correct="false">Es más rápido</button>
+              <button class="quiz-option animate-hover" data-correct="false">Es más barato</button>
+              <button class="quiz-option animate-hover" data-correct="true">Muestra el comportamiento real del usuario</button>
+              <button class="quiz-option animate-hover" data-correct="false">Permite recolectar más datos</button>
+            </div>
+          </div>
+
+          <!-- Pregunta 5 -->
+          <div class="quiz-question" data-question="5" style="display: none;">
+            <p class="question-text">¿Para qué sirve principalmente el análisis de datos?</p>
+            <div class="quiz-options">
+              <button class="quiz-option animate-hover" data-correct="false">Para hacer entrevistas</button>
+              <button class="quiz-option animate-hover" data-correct="false">Para crear encuestas</button>
+              <button class="quiz-option animate-hover" data-correct="false">Para observar usuarios</button>
+              <button class="quiz-option animate-hover" data-correct="true">Para encontrar patrones y tendencias</button>
+            </div>
+          </div>
+
+          <p class="quiz-feedback"></p>
+
+          <!-- Botones de navegación -->
+          <div class="quiz-navigation">
+            <button class="nav-button" id="prevQuestion" disabled>Anterior</button>
+            <button class="nav-button" id="nextQuestion" disabled>Siguiente</button>
+          </div>
+
+          <button class="restart-button" id="restartQuiz" style="display: none;">Reiniciar Quiz</button>
+        </div>
+
+        <!-- Resumen del Quiz -->
+        <div class="quiz-summary" style="display: none;">
+          <h4>Resumen del Quiz</h4>
+          <div class="score-container">
+            <div class="score-circle">
+              <span id="finalScore">0</span>
+              <span class="score-total">/ 5</span>
+            </div>
+            <div class="score-text">
+              <p>¡Has completado el quiz!</p>
+              <p class="score-message"></p>
+            </div>
+          </div>
+          <div class="results-graph">
+            <div class="graph-bar">
+              <div class="correct-answers"></div>
+              <div class="incorrect-answers"></div>
+            </div>
+            <div class="graph-legend">
+                </div>
+          </div>
+          <div class="question-review">
+            <!-- El resumen de las preguntas se agregará aquí dinámicamente -->
+          </div>
+          <button class="restart-button" id="restartFromSummary">¡Intentar de Nuevo!</button>
+        </div>
+
+        <style>
+
+          /* Estilos para el resumen del quiz */
+.quiz-summary {
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 2rem auto;
+    animation: fadeInUp 0.8s ease-out;
+}
+.view-button {
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    flex: 1;
+    background: linear-gradient(45deg, #4CAF50, #45a049);
+    color: white;
+    box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+}
+.view-button:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+.view-button:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(76, 175, 80, 0.4);
+}
+.quiz-summary h4 {
+    font-size: 2.5em;
+    color: #2196F3;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(45deg, #2196F3, #03A9F4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.score-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    margin: 2.5rem auto;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    max-width: 600px;
+}
+
+.score-circle {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2196F3, #03A9F4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 10px 20px rgba(33, 150, 243, 0.3);
+    animation: pulseScore 2s infinite;
+    position: relative;
+    margin: 0 auto;
+}
+
+#finalScore {
+    font-size: 4em;
+    font-weight: bold;
+    line-height: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -65%);
+    margin: 0;
+    padding: 0;
+}
+
+.score-total {
+    font-size: 1.8em;
+    opacity: 0.9;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 10%);
+    margin: 0;
+    padding: 0;
+}
+
+.score-text {
+    text-align: center;
+    padding: 1rem;
+}
+
+.score-text p {
+    margin: 0.8rem 0;
+    font-size: 1.4em;
+    color: #333;
+}
+
+.score-message {
+    color: #2196F3;
+    font-weight: 600;
+}
+
+.results-graph {
+    margin: 2.5rem 0;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.graph-bar {
+    height: 35px;
+    background: #e0e0e0;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    margin: 1rem 0;
+}
+
+.correct-answers {
+    background: linear-gradient(45deg, #4CAF50, #45a049);
+    height: 100%;
+    transition: width 1s ease;
+}
+
+.incorrect-answers {
+    background: linear-gradient(45deg, #F44336, #d32f2f);
+    height: 100%;
+    transition: width 1s ease;
+}
+
+.graph-legend {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    margin-top: 1.5rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.legend-color {
+    width: 25px;
+    height: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.legend-color.correct {
+    background: linear-gradient(45deg, #4CAF50, #45a049);
+}
+
+.legend-color.incorrect {
+    background: linear-gradient(45deg, #F44336, #d32f2f);
+}
+
+#restartFromSummary {
+    background: linear-gradient(45deg, #FF5722, #F44336);
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 30px;
+    font-size: 1.3em;
+    font-weight: 600;
+    margin: 2rem auto;
+    display: block;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(244, 67, 54, 0.3);
+}
+
+#restartFromSummary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(244, 67, 54, 0.4);
+}
+
+@keyframes pulseScore {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+    .quiz-summary {
+        padding: 1.5rem;
+    }
+
+    .quiz-summary h4 {
+        font-size: 2em;
+    }
+
+    .score-container {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .score-circle {
+        width: 150px;
+        height: 150px;
+    }
+
+    #finalScore {
+        font-size: 3em;
+    }
+
+    .score-total {
+        font-size: 1.5em;
+    }
+
+    .score-text p {
+        font-size: 1.2em;
+    }
+
+    .graph-legend {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+}
+          /* Estilos para el creador de encuestas */
+.survey-creator {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
+    background: #fff;
+    margin: 2rem auto;
+    max-width: 1200px;
+}
+
+.survey-preview {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 15px;
+    min-height: 400px;
+}
+
+.survey-controls {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.control-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.form-input:focus {
+    border-color: #2196F3;
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+    outline: none;
+}
+
+.option-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.add-option-btn {
+    background: none;
+    border: 2px dashed #2196F3;
+    color: #2196F3;
+    padding: 0.8rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+}
+
+.add-option-btn:hover {
+    background: rgba(33, 150, 243, 0.1);
+}
+
+.survey-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.primary-button, .secondary-button {
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    flex: 1;
+}
+
+.primary-button {
+    background: linear-gradient(45deg, #2196F3, #03A9F4);
+    color: white;
+    box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+}
+
+.secondary-button {
+    background: white;
+    color: #2196F3;
+    border: 2px solid #2196F3;
+}
+
+.primary-button:hover, .secondary-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* Estilos para la vista previa */
+.survey-title.card {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.editable {
+    padding: 0.3rem 0.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.editable:hover {
+    background: rgba(33, 150, 243, 0.1);
+    cursor: pointer;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+    .survey-creator {
+        grid-template-columns: 1fr;
+    }
+    
+    .survey-actions {
+        flex-direction: column;
+    }
+    
+    .primary-button, .secondary-button {
+        width: 100%;
+    }
+}
+
+/* Estilos para títulos centrados */
+h2, h3, h4, p {
+    text-align: center;
+    margin: 2rem auto;
+    font-weight: 700;
+}
+h3{
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+          .quiz-progress {
+        text-align: center;
+        margin: 2rem auto;
+        max-width: 800px;
+    }
+
+    .progress-bar {
+        background: #f0f0f0;
+        border-radius: 20px;
+        height: 15px;
+        margin: 1rem auto;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+    }
+    .score-container{
+        font-size: 1.2em;
+        font-weight: 600;
+        color: #333;
+        display: block;
+        text-align: center;
+        margin-top: 1rem; 
+    }
+.quiz-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin: 2rem auto;
+    width: 100%;
+    padding: 1rem 0;
+}
+
+.nav-button {
+    background: linear-gradient(45deg, #2196F3, #03A9F4);
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: 600;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.nav-button:hover:not(:disabled) { 
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.nav-button:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+    .progress-fill {
+        background: linear-gradient(45deg, #2196F3, #03A9F4);
+        height: 100%;
+        width: 0%; /* Asegura que comience en 0 */
+        transition: width 0.5s ease-in-out;
+    }
+
+    .progress-text {
+        font-size: 1.2em;
+        font-weight: 600;
+        color: #333;
+        display: block;
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    /* Ajustes responsivos */
+    @media (max-width: 768px) {
+        .quiz-progress {
+            max-width: 90%;
+        }
+        
+        .progress-text {
+            font-size: 1em;
+        }
+    }
+          
+          .topic-header h2 {
+              font-size: 3em;
+              color: #2196F3;
+              text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+              padding: 1rem 0;
+          }
+          
+          .section-title {
+              font-size: 2.5em;
+              color: #333;
+              position: relative;
+              padding-bottom: 1rem;
+          }
+          
+          .section-title::after {
+              content: '';
+              position: absolute;
+              bottom: 0;
+              left: 50%;
+              transform: translateX(-50%);
+              width: 100px;
+              height: 3px;
+              background: linear-gradient(45deg, #2196F3, #03A9F4);
+              border-radius: 2px;
+          }
+          
+          .method-card h4 {
+              font-size: 1.8em;
+              color: #2196F3;
+              margin: 1rem 0;
+          }
+          
+          .importance-item h4 {
+              font-size: 1.5em;
+              color: #333;
+              margin: 1rem 0;
+          }
+          
+          .preview-title, .controls-title {
+              font-size: 2em;
+              color: #2196F3;
+              margin: 1.5rem 0;
+          }
+          
+          .quiz-section h3 {
+              font-size: 2.8em;
+              background: linear-gradient(45deg, #2196F3, #03A9F4);
+              background-clip: text;
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              margin-bottom: 2rem;
+          }
+          
+          /* Animación para títulos */
+          h2, h3, h4 {
+              animation: titleFadeIn 0.8s ease-out;
+          }
+          
+          @keyframes titleFadeIn {
+              from {
+                  opacity: 0;
+                  transform: translateY(-20px);
+              }
+              to {
+                  opacity: 1;
+                  transform: translateY(0);
+              }
+          }
+          
+          /* Ajustes responsivos para títulos */
+          @media (max-width: 768px) {
+              .topic-header h2 {
+                  font-size: 2.5em;
+              }
+          
+              .section-title {
+                  font-size: 2em;
+              }
+          
+              .method-card h4 {
+                  font-size: 1.5em;
+              }
+          }
+        
+
+          /* Animations and Enhanced Styles */
+          .data-intro {
+              text-align: center;
+              margin: 2rem auto;
+          }
+
+          .data-image {
+              display: block;
+              margin: 0 auto;
+              max-width: 100%;
+              height: auto;
+              border-radius: 10px;
+              box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+          }
+
+          .pulse {
+              animation: pulse 2s infinite;
+          }
+
+          @keyframes pulse {
+              0% {
+                  transform: scale(1);
+              }
+              50% {
+                  transform: scale(1.02);
+              }
+              100% {
+                  transform: scale(1);
+              }
+          }
+
+          .animate-title {
+            animation: slideInDown 0.8s ease-out;
+          }
+
+          .animate-subtitle {
+            animation: fadeIn 1s ease-out 0.5s both;
+          }
+
+          .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+          }
+
+          .card-shadow {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+          }
+
+          .card-shadow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+          }
+
+          .method-card {
+            transition: transform 0.3s ease;
+          }
+
+          .method-card:hover {
+            transform: translateY(-5px);
+          }
+
+          .animate-hover {
+            transition: all 0.3s ease;
+          }
+
+          .animate-hover:hover {
+            transform: scale(1.02);
+          }
+
+          .primary-button {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+          }
+
+          .primary-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          }
+
+          .form-input {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            transition: border-color 0.3s ease;
+          }
+
+          .form-input:focus {
+            border-color: #4CAF50;
+            outline: none;
+          }
+
+          .quiz-option {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 12px 24px;
+            margin: 8px 0;
+            width: 100%;
+            transition: all 0.3s ease;
+          }
+
+          .quiz-option:hover {
+            background: #f5f5f5;
+            border-color: #4CAF50;
+          }
+
+          .quiz-option.correct {
+            background: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
+          }
+
+          .quiz-option.incorrect {
+            background: #F44336;
+            color: white;
+            border-color: #F44336;
+          }
+
+          @keyframes slideInDown {
+            from {
+              transform: translateY(-20px);
+              opacity: 0;
+            }
+            to {
+              transform: translateY(0);
+              opacity: 1;
+            }
+          }
+
+          @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+          }
+
+          /* Estilos adicionales para la funcionalidad */
+          .survey-question {
+              background: white;
+              padding: 1rem;
+              margin: 1rem 0;
+              border-radius: 8px;
+              box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+          }
+
+          .question-options {
+              margin: 1rem 0;
+          }
+
+          .option {
+              margin: 0.5rem 0;
+          }
+
+          .rating-scale {
+              display: flex;
+              justify-content: space-around;
+              margin: 1rem 0;
+          }
+
+          .delete-question {
+              background: #ff4444;
+              color: white;
+              border: none;
+              padding: 0.5rem 1rem;
+              border-radius: 4px;
+              cursor: pointer;
+              margin-top: 1rem;
+          }
+
+          .alert {
+              position: fixed;
+              top: 20px;
+              right: 20px;
+              padding: 1rem 2rem;
+              border-radius: 8px;
+              z-index: 1000;
+              animation: slideIn 0.3s ease-out, fadeOut 0.3s ease-out 2.7s;
+              box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+              max-width: 350px;
+          }
+
+          .alert-error {
+              background: #ffebee;
+              color: #c62828;
+              border: 1px solid #ef5350;
+          }
+
+          .alert-success {
+              background: #e8f5e9;
+              color: #2e7d32;
+              border: 1px solid #66bb6a;
+          }
+
+          @keyframes slideIn {
+              from {
+                  transform: translateX(100%);
+                  opacity: 0;
+              }
+              to {
+                  transform: translateX(0);
+                  opacity: 1;
+              }
+          }
+
+          @keyframes fadeOut {
+              from {
+                  opacity: 1;
+              }
+              to {
+                  opacity: 0;
+              }
+          }
+
+          .rating-options {
+              display: flex;
+              gap: 1rem;
+          }
+
+          @keyframes fadeIn {
+              from { opacity: 0; transform: translateY(-10px); }
+              to { opacity: 1; transform: translateY(0); }
+          }
+
+          /* Responsive Design Improvements */
+          @media (max-width: 768px) {
+            .methods-container {
+                grid-template-columns: 1fr;
+            }
+
+            .survey-creator {
+                flex-direction: column;
+            }
+
+            .survey-preview,
+            .survey-controls {
+                width: 100%;
+            }
+          }
+        </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const surveyTitle = document.getElementById('survey-title');
+    const previewTitle = document.getElementById('preview-title');
+    const questionText = document.getElementById('question-text');
+    const questionType = document.getElementById('question-type');
+    const optionsGroup = document.getElementById('options-group');
+    const addOptionBtn = document.getElementById('add-option-btn');
+    const addQuestionBtn = document.getElementById('add-question-btn');
+    const saveSurveyBtn = document.getElementById('save-survey-btn');
+    const surveyQuestions = document.getElementById('survey-questions');
+
+    // Actualizar título en tiempo real
+    surveyTitle.addEventListener('input', function() {
+        previewTitle.textContent = this.value;
+    });
+
+    // Manejar cambio de tipo de pregunta
+    questionType.addEventListener('change', function() {
+        const optionsContainer = document.querySelector('.option-inputs');
+        optionsContainer.innerHTML = '';
+
+        switch(this.value) {
+            case 'multiple':
+                optionsGroup.style.display = 'block';
+                optionsContainer.innerHTML = `
+                    <input type="text" class="option-input form-input" placeholder="Opción 1">
+                    <input type="text" class="option-input form-input" placeholder="Opción 2">
+                    <input type="text" class="option-input form-input" placeholder="Opción 3">
+                    <button class="add-option-btn" id="add-option-btn">+ Agregar opción</button>
+                `;
+                break;
+            case 'text':
+                optionsGroup.style.display = 'none';
+                break;
+            case 'rating':
+                optionsGroup.style.display = 'block';
+                optionsContainer.innerHTML = `
+                    <div class="rating-options">
+                        <input type="number" class="form-input" placeholder="Valor mínimo" min="0" max="10" value="1">
+                        <input type="number" class="form-input" placeholder="Valor máximo" min="0" max="10" value="5">
+                    </div>
+                `;
+                break;
+        }
+    });
+
+    // Agregar nueva opción
+    document.addEventListener('click', function(e) {
+        if (e.target && e.target.id === 'add-option-btn') {
+            const optionsContainer = document.querySelector('.option-inputs');
+            const newOption = document.createElement('input');
+            newOption.type = 'text';
+            newOption.className = 'option-input form-input';
+            newOption.placeholder = `Opción ${optionsContainer.querySelectorAll('.option-input').length + 1}`;
+            optionsContainer.insertBefore(newOption, e.target);
+        }
+    });
+
+    // Agregar nueva pregunta
+    addQuestionBtn.addEventListener('click', function() {
+        if (!questionText.value.trim()) {
+            mostrarAlerta('Por favor, escribe una pregunta');
+            return;
+        }
+
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'survey-question card';
+        questionDiv.dataset.type = questionType.value;
+        
+        let optionsHTML = '';
+        if (questionType.value === 'multiple') {
+            const options = document.querySelectorAll('.option-input');
+            if (options.length < 2) {
+                mostrarAlerta('Debes agregar al menos 2 opciones');
+                return;
+            }
+            optionsHTML = '<div class="question-options">';
+            options.forEach(option => {
+                if (option.value.trim()) {
+                    optionsHTML += `<div class="option"><input type="radio" name="q${Date.now()}"> ${option.value}</div>`;
+                }
+            });
+            optionsHTML += '</div>';
+        } else if (questionType.value === 'text') {
+            optionsHTML = '<textarea class="form-input" rows="3" placeholder="Escribe tu respuesta aquí"></textarea>';
+        } else if (questionType.value === 'rating') {
+            const min = document.querySelector('.rating-options input:first-child').value;
+            const max = document.querySelector('.rating-options input:last-child').value;
+            questionDiv.dataset.min = min;
+            questionDiv.dataset.max = max;
+            optionsHTML = `<div class="rating-scale">`;
+            for (let i = min; i <= max; i++) {
+                optionsHTML += `<label><input type="radio" name="q${Date.now()}" value="${i}"> ${i}</label>`;
+            }
+            optionsHTML += '</div>';
+        }
+
+        questionDiv.innerHTML = `
+            <p class="question-text">${questionText.value}</p>
+            ${optionsHTML}
+            <button class="delete-question" onclick="this.parentElement.remove()">Eliminar</button>
+        `;
+
+        surveyQuestions.appendChild(questionDiv);
+        limpiarFormulario();
+    });
+
+    // Guardar encuesta
+    saveSurveyBtn.addEventListener('click', function() {
+        const questions = surveyQuestions.querySelectorAll('.survey-question');
+        if (!surveyTitle.value.trim()) {
+            mostrarAlerta('Por favor, agrega un título a la encuesta');
+            return;
+        }
+        if (questions.length === 0) {
+            mostrarAlerta('Debes agregar al menos una pregunta');
+            return;
+        }
+
+        // Recolectar datos de la encuesta
+        const surveyData = {
+            title: surveyTitle.value,
+            questions: Array.from(questions).map(q => {
+                const questionText = q.querySelector('.question-text').textContent;
+                const type = q.dataset.type || 'multiple';
+                let options;
+
+                if (type === 'multiple') {
+                    options = Array.from(q.querySelectorAll('.option')).map(opt => opt.textContent);
+                } else if (type === 'rating') {
+                    options = {
+                        min: q.dataset.min || 1,
+                        max: q.dataset.max || 5
+                    };
+                }
+
+                return {
+                    text: questionText,
+                    type: type,
+                    options: options
+                };
+            })
+        };
+
+        // Guardar en localStorage
+        localStorage.setItem('surveyData', JSON.stringify(surveyData));
+        
+        // Habilitar el botón de ver encuesta
+        document.getElementById('view-survey-btn').disabled = false;
+        
+        mostrarAlerta('¡Encuesta guardada con éxito!', 'success');
+    });
+
+    // Funciones auxiliares
+    function limpiarFormulario() {
+        questionText.value = '';
+        const options = document.querySelectorAll('.option-input');
+        options.forEach(option => option.value = '');
+    }
+
+    function mostrarAlerta(mensaje, tipo = 'error') {
+        const alertDiv = document.createElement('div');
+        alertDiv.className = `alert alert-${tipo}`;
+        alertDiv.textContent = mensaje;
+        document.body.appendChild(alertDiv);
+        
+        // Eliminar la alerta después de 3 segundos
+        setTimeout(() => {
+            alertDiv.remove();
+        }, 3000);
+    }
+});
+
+// Variables para el quiz
+let currentQuestion = 1;
+const totalQuestions = 5;
+let userAnswers = {};
+let score = 0;
+  
+          // Elementos del DOM
+          const quizQuestions = document.querySelectorAll('.quiz-question');
+          const prevButton = document.getElementById('prevQuestion');
+          const nextButton = document.getElementById('nextQuestion');
+          const quizFeedback = document.querySelector('.quiz-feedback');
+          const restartButton = document.getElementById('restartQuiz');
+          const quizSummary = document.querySelector('.quiz-summary');
+          const finalScoreSpan = document.getElementById('finalScore');
+          const questionReview = document.querySelector('.question-review');
+          const reviewButton = document.getElementById('reviewQuestions');
+          const restartFromSummary = document.getElementById('restartFromSummary');
+  
+          // Función para mostrar una pregunta específica
+          function showQuestion(questionNumber) {
+            quizQuestions.forEach(question => {
+              question.style.display = 'none';
+            });
+            document.querySelector(`[data-question="${questionNumber}"]`).style.display = 'block';
+            
+            // Actualizar estado de los botones
+            prevButton.disabled = questionNumber === 1;
+            nextButton.disabled = !userAnswers[questionNumber];
+            
+            if (questionNumber === totalQuestions) {
+              nextButton.textContent = 'Finalizar';
+            } else {
+              nextButton.textContent = 'Siguiente';
+              nextButton.disabled = !userAnswers[questionNumber];
+            }
+  
+            // Limpiar feedback
+            quizFeedback.textContent = '';
+          }
+  
+          // Función para habilitar todas las opciones de una pregunta
+          function enableQuestionOptions(questionElement) {
+            const options = questionElement.querySelectorAll('.quiz-option');
+            options.forEach(option => {
+              option.disabled = false;
+              option.classList.remove('correct', 'incorrect');
+            });
+          }
+  
+          // Manejar clics en las opciones
+          quizQuestions.forEach(question => {
+            const options = question.querySelectorAll('.quiz-option');
+            options.forEach(option => {
+              option.addEventListener('click', function() {
+                const questionNumber = parseInt(question.dataset.question);
+                
+                // Deshabilitar todas las opciones de la pregunta actual
+                options.forEach(opt => {
+                  opt.disabled = true;
+                });
+  
+                // Marcar respuesta correcta/incorrecta
+                const isCorrect = this.dataset.correct === 'true';
+                this.classList.add(isCorrect ? 'correct' : 'incorrect');
+                
+                // Guardar respuesta
+                userAnswers[questionNumber] = {
+                  selected: this.textContent,
+                  correct: isCorrect
+                };
+  
+                // Mostrar feedback
+                quizFeedback.textContent = isCorrect ? '¡Correcto! ¡Muy bien!' : 'Incorrecto. Intenta de nuevo.';
+                quizFeedback.style.color = isCorrect ? '#4CAF50' : '#F44336';
+  
+                // Habilitar botón siguiente
+                nextButton.disabled = false;
+  
+                // Mostrar la respuesta correcta si es incorrecta
+                if (!isCorrect) {
+                  options.forEach(btn => {
+                    if (btn.dataset.correct === 'true') {
+                      btn.classList.add('correct');
+                    }
+                  });
+                }
+  
+                // Avanzar automáticamente después de 1.5 segundos
+                setTimeout(() => {
+                  if (questionNumber < totalQuestions) {
+                    currentQuestion = questionNumber + 1;
+                    showQuestion(currentQuestion);
+                  }
+                }, 2000);
+              });
+            });
+          });
+  
+          // Navegación entre preguntas
+          prevButton.addEventListener('click', () => {
+            if (currentQuestion > 1) {
+              currentQuestion--;
+              showQuestion(currentQuestion);
+            }
+          });
+  
+          nextButton.addEventListener('click', () => {
+            if (currentQuestion < totalQuestions) {
+              currentQuestion++;
+              showQuestion(currentQuestion);
+            } else {
+              showQuizSummary();
+            }
+          });
+  
+          // Función para mostrar el resumen del quiz
+          function showQuizSummary() {
+            score = Object.values(userAnswers).filter(answer => answer.correct).length;
+            finalScoreSpan.textContent = score;
+            
+            // Actualizar mensaje según la puntuación
+            const scoreMessage = document.querySelector('.score-message');
+            if (score === 5) {
+              scoreMessage.textContent = '¡Excelente! ¡Has dominado el tema!';
+            } else if (score >= 3) {
+              scoreMessage.textContent = '¡Buen trabajo! Casi lo tienes.';
+            } else {
+              scoreMessage.textContent = 'Sigue practicando, ¡tú puedes!';
+            }
+
+            // Actualizar gráfica de resultados
+            const correctBar = document.querySelector('.correct-answers');
+            const incorrectBar = document.querySelector('.incorrect-answers');
+            const correctWidth = (score / totalQuestions) * 100;
+            const incorrectWidth = ((totalQuestions - score) / totalQuestions) * 100;
+            
+            correctBar.style.width = `${correctWidth}%`;
+            incorrectBar.style.width = `${incorrectWidth}%`;
+
+            // Crear resumen de preguntas
+            questionReview.innerHTML = '';
+            quizQuestions.forEach((question, index) => {
+              const questionNumber = index + 1;
+              const answer = userAnswers[questionNumber];
+              const reviewItem = document.createElement('div');
+              reviewItem.className = `review-item ${answer.correct ? 'correct' : 'incorrect'}`;
+              reviewItem.innerHTML = `
+                <p><strong>Pregunta ${questionNumber}:</strong> ${question.querySelector('.question-text').textContent}</p>
+                <p>Tu respuesta: ${answer.selected}</p>
+                <p>Estado: ${answer.correct ? '✅ Correcto' : '❌ Incorrecto'}</p>
+              `;
+              questionReview.appendChild(reviewItem);
+            });
+
+            // Mostrar resumen y ocultar preguntas
+            document.querySelector('.quiz-questions').style.display = 'none';
+            quizSummary.style.display = 'block';
+          }
+  
+          // Función para reiniciar el quiz
+          function restartQuiz() {
+            currentQuestion = 1;
+            userAnswers = {};
+            score = 0;
+  
+            // Resetear todas las preguntas
+            quizQuestions.forEach(question => {
+              enableQuestionOptions(question);
+            });
+  
+            // Mostrar primera pregunta
+            document.querySelector('.quiz-questions').style.display = 'block';
+            quizSummary.style.display = 'none';
+            restartButton.style.display = 'none';
+            showQuestion(1);
+            quizFeedback.textContent = '';
+          }
+  
+          // Event listeners para los botones de reinicio
+          restartButton.addEventListener('click', restartQuiz);
+          restartFromSummary.addEventListener('click', restartQuiz);
+          reviewButton.addEventListener('click', () => {
+            quizSummary.style.display = 'none';
+            document.querySelector('.quiz-questions').style.display = 'block';
+            showQuestion(1);
+            restartButton.style.display = 'block';
+          });
+  
+          // Inicializar quiz
+          showQuestion(1);
+        
+
+          // Survey creator functionality
+          const surveyTitle = document.getElementById('survey-title');
+          const previewTitle = document.getElementById('preview-title');
+          const questionText = document.getElementById('question-text');
+          const optionInputs = document.querySelectorAll('.option-input');
+          const addQuestionBtn = document.getElementById('add-question-btn');
+          const surveyQuestions = document.getElementById('survey-questions');
+          
+          let questionCount = 1;
+
+          surveyTitle.addEventListener('input', function() {
+            previewTitle.textContent = this.value;
+          });
+
+          addQuestionBtn.addEventListener('click', function() {
+            const question = questionText.value.trim();
+            if (!question) {
+              alert('Por favor, escribe una pregunta');
+              return;
+            }
+            
+            let options = [];
+            optionInputs.forEach(input => {
+              const option = input.value.trim();
+              if (option) {
+                options.push(option);
+              }
+            });
+            
+            if (options.length < 2) {
+              alert('Por favor, agrega al menos dos opciones');
+              return;
+            }
+            
+            questionCount++;
+            
+            // Create preview question
+            const previewQuestion = document.createElement('div');
+            previewQuestion.className = 'preview-question';
+            
+            const questionTitle = document.createElement('p');
+            questionTitle.innerHTML = `<strong>Pregunta ${questionCount}:</strong> ${question}`;
+            previewQuestion.appendChild(questionTitle);
+            
+            const previewOptions = document.createElement('div');
+            previewOptions.className = 'preview-options';
+            
+            options.forEach(option => {
+              const label = document.createElement('label');
+              const radio = document.createElement('input');
+              radio.type = 'radio';
+              radio.name = `q${questionCount}`;
+              
+              label.appendChild(radio);
+              label.appendChild(document.createTextNode(` ${option}`));
+              previewOptions.appendChild(label);
+            });
+            
+            previewQuestion.appendChild(previewOptions);
+            surveyQuestions.appendChild(previewQuestion);
+            
+            // Reset inputs
+            questionText.value = '';
+            optionInputs.forEach(input => {
+              input.value = '';
+            });
+          });
+
+          // Enhanced Survey Creator
+          document.getElementById('add-option-btn').addEventListener('click', function() {
+            const optionInputs = document.querySelector('.option-inputs');
+            const newInput = document.createElement('input');
+            newInput.type = 'text';
+            newInput.className = 'option-input form-input';
+            newInput.placeholder = `Opción ${optionInputs.children.length}`;
+            optionInputs.insertBefore(newInput, this);
+          });
+
+          // Add animations to elements when they come into view
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+              }
+            });
+          });
+
+          document.querySelectorAll('.info-section').forEach(section => {
+            observer.observe(section);
+          });
+
+          // Función para manejar el clic en las opciones
+function handleOptionClick(event) {
+    const button = event.target;
+    const questionDiv = button.closest('.quiz-question');
+    const questionNumber = parseInt(questionDiv.dataset.question);
+    const isCorrect = button.dataset.correct === 'true';
+    
+    // Si la pregunta ya fue respondida, no hacer nada
+    if (userAnswers[questionNumber]) return;
+    
+    // Guardar la respuesta
+    userAnswers[questionNumber] = {
+        selected: button.textContent,
+        correct: isCorrect
+    };
+    
+    // Actualizar la barra de progreso basado en preguntas respondidas
+    const progressPercentage = (Object.keys(userAnswers).length / totalQuestions) * 100;
+    document.querySelector('.progress-fill').style.width = `${progressPercentage}%`;
+    
+    // Marcar la respuesta como correcta o incorrecta
+    button.classList.add(isCorrect ? 'correct' : 'incorrect');
+    
+    // Deshabilitar todas las opciones de esta pregunta
+    const options = questionDiv.querySelectorAll('.quiz-option');
+    options.forEach(option => {
+        option.disabled = true;
+        if (option !== button && option.dataset.correct === 'true') {
+            option.classList.add('correct');
+        }
+    });
+    
+    // Habilitar el botón siguiente
+    nextButton.disabled = false;
+    
+    // Mostrar feedback
+    quizFeedback.textContent = isCorrect ? '¡Correcto! 🎉' : 'Incorrecto 😕';
+    quizFeedback.style.color = isCorrect ? '#4CAF50' : '#F44336';
+    
+    // Si es la última pregunta, asegurarse de que la barra se complete
+    if (questionNumber === totalQuestions) {
+        document.querySelector('.progress-fill').style.width = '100%';
+    }
+}
+
+// Agregar event listeners a todas las opciones
+document.querySelectorAll('.quiz-option').forEach(button => {
+    button.addEventListener('click', handleOptionClick);
+});
+
+// Función para mostrar una pregunta específica
+function showQuestion(questionNumber) {
+    quizQuestions.forEach(question => {
+        question.style.display = 'none';
+    });
+    document.querySelector(`[data-question="${questionNumber}"]`).style.display = 'block';
+    
+    // Actualizar estado de los botones
+    prevButton.disabled = questionNumber === 1;
+    nextButton.disabled = !userAnswers[questionNumber];
+    
+    if (questionNumber === totalQuestions) {
+        nextButton.textContent = 'Finalizar';
+    } else {
+        nextButton.textContent = 'Siguiente';
+    }
+
+    // Limpiar feedback
+    quizFeedback.textContent = '';
+}
+        </script>
+{% endblock %}
+

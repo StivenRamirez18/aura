@@ -1,0 +1,809 @@
+{% extends "base.html" %}
+{% block title %}Wireframes{% endblock %}
+
+{% block content %}
+  <!-- Se elimina el encabezado duplicado con fondo morado -->
+  
+  <div class="topic-content">
+    <!-- Sección principal de wireframes con diseño mejorado -->
+    <section class="wireframes-section">
+        <div class="section-header">
+            <h2><i class="fas fa-pencil-ruler"></i> Wireframes</h2>
+            <p class="section-subtitle">¡Aprende a dibujar tus ideas antes de programarlas!</p>
+        </div>
+        
+        <div class="wireframe-components">
+            <h3>Componentes Básicos de un Wireframe</h3>
+            
+            <div class="components-grid">
+                <div class="component-card">
+                    <div class="component-preview">
+                        <div class="encabezado-preview"></div>
+                    </div>
+                    <div class="component-info">
+                        <h4>Encabezado</h4>
+                        <p>Área superior que contiene el logo y posiblemente el menú principal</p>
+                    </div>
+                </div>
+                
+                <div class="component-card">
+                    <div class="component-preview">
+                        <div class="menu-preview"></div>
+                    </div>
+                    <div class="component-info">
+                        <h4>Menú de Navegación</h4>
+                        <p>Conjunto de enlaces para moverse por las diferentes secciones</p>
+                    </div>
+                </div>
+                
+                <div class="component-card">
+                    <div class="component-preview">
+                        <div class="busqueda-preview">
+                            <div class="search-bar"></div>
+                        </div>
+                    </div>
+                    <div class="component-info">
+                        <h4>Barra de Búsqueda</h4>
+                        <p>Campo para que los usuarios busquen contenido</p>
+                    </div>
+                </div>
+                
+                <div class="component-card">
+                    <div class="component-preview">
+                        <div class="imagen-preview"></div>
+                    </div>
+                    <div class="component-info">
+                        <h4>Área de Imagen</h4>
+                        <p>Espacio reservado para imágenes o gráficos</p>
+                    </div>
+                </div>
+                
+                <div class="component-card">
+                    <div class="component-preview">
+                        <div class="texto-preview">
+                            <div class="text-line"></div>
+                            <div class="text-line"></div>
+                            <div class="text-line short"></div>
+                        </div>
+                    </div>
+                    <div class="component-info">
+                        <h4>Bloque de Texto</h4>
+                        <p>Contenedor para párrafos de texto</p>
+                    </div>
+                </div>
+                
+                <div class="component-card">
+                    <div class="component-preview">
+                        <div class="boton-preview">Botón</div>
+                    </div>
+                    <div class="component-info">
+                        <h4>Botón</h4>
+                        <p>Elemento interactivo para acciones del usuario</p>
+                    </div>
+                </div>
+                
+                <div class="component-card">
+                    <div class="component-preview">
+                        <div class="pie-preview"></div>
+                    </div>
+                    <div class="component-info">
+                        <h4>Pie de Página</h4>
+                        <p>Área inferior con información adicional y enlaces</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sección de sopa de letras mejorada -->
+        <div class="wordsearch-section">
+            <h3 class="wordsearch-title">Sopa de Letras de Wireframes</h3>
+            <p class="wordsearch-description">Encuentra las siguientes palabras relacionadas con wireframes:</p>
+            
+            <div class="wordsearch-content">
+                <div class="wordsearch-words">
+                    <h4>Palabras a buscar:</h4>
+                    <ul class="palabras-buscar">
+                        <li>Wireframe</li>
+                        <li>Prototipo</li>
+                        <li>Navegación</li>
+                        <li>Botón</li>
+                        <li>Esquema</li>
+                        <li>Interfaz</li>
+                        <li>Usuario</li>
+                        <li>Diseño</li>
+                    </ul>
+                </div>
+                
+                <div class="wordsearch-board">
+                    <table class="sopa-letras" id="wordsearch-puzzle">
+                        <!-- La tabla se generará con JavaScript -->
+                    </table>
+                </div>
+            </div>
+            
+            <div id="mensaje-exito" class="alert alert-success" style="display: none;"></div>
+            
+            <!-- Nuevo elemento para mostrar el mensaje de finalización -->
+            <div id="mensaje-finalizado" class="mensaje-finalizado" style="display: none;">
+                <div class="mensaje-contenido">
+                    <h3>¡Sopa de letras finalizada!</h3>
+                    <p>¡Felicidades! Has encontrado todas las palabras.</p>
+                    <div class="confetti-container"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+  </div>
+
+  <style>
+    /* Estilos mejorados para toda la página */
+    .topic-header {
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .topic-header h2 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .topic-header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding: 1.5rem;
+      background: #f8f9fa;
+      border-left: 5px solid #2575fc;
+      border-radius: 0 8px 8px 0;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    
+    .section-header h2 {
+      color: #333;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .section-subtitle {
+      color: #666;
+      font-size: 1.1rem;
+    }
+    
+    /* Estilos para los componentes de wireframe */
+    .wireframe-components {
+      margin-bottom: 3rem;
+    }
+    
+    .wireframe-components h3 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #333;
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .wireframe-components h3:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: #2575fc;
+    }
+    
+    .components-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    
+    .component-card {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .component-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    }
+    
+    .component-preview {
+      height: 120px;
+      background-color: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .component-info {
+      padding: 1.2rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .component-info h4 {
+      color: #2575fc;
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+    }
+    
+    .component-info p {
+      color: #666;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+    
+    /* Estilos para los previews de componentes */
+    .encabezado-preview, .menu-preview, .busqueda-preview, 
+    .imagen-preview, .texto-preview, .boton-preview, .pie-preview {
+      width: 100%;
+      height: 100%;
+      border: 2px dashed #aaa;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    
+    .encabezado-preview:before {
+      content: 'LOGO';
+      font-weight: bold;
+      color: #888;
+    }
+    
+    .menu-preview {
+      display: flex;
+      justify-content: space-around;
+    }
+    
+    .menu-preview:before {
+      content: '';
+      position: absolute;
+      width: 70%;
+      height: 10px;
+      background: #ccc;
+      border-radius: 5px;
+    }
+    
+    .search-bar {
+      width: 80%;
+      height: 30px;
+      border: 1px solid #ccc;
+      border-radius: 15px;
+      background: white;
+    }
+    
+    .imagen-preview {
+      position: relative;
+    }
+    
+    .imagen-preview:before {
+      content: '📷';
+      font-size: 2rem;
+    }
+    
+    .text-line {
+      width: 100%;
+      height: 8px;
+      background: #ccc;
+      margin-bottom: 8px;
+      border-radius: 4px;
+    }
+    
+    .text-line.short {
+      width: 60%;
+    }
+    
+    .boton-preview {
+      background: #2575fc;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    
+    .pie-preview {
+      position: relative;
+    }
+    
+    .pie-preview:before {
+      content: '';
+      position: absolute;
+      width: 80%;
+      height: 40%;
+      border-top: 2px dashed #aaa;
+      top: 30%;
+    }
+    
+    /* Estilos para la sopa de letras */
+    .wordsearch-section {
+      background: white;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+      margin-top: 3rem;
+    }
+    
+    .wordsearch-title {
+      text-align: center;
+      color: #333;
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .wordsearch-title:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: #2575fc;
+    }
+    
+    .wordsearch-description {
+      text-align: center;
+      color: #666;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+    
+    .wordsearch-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+    
+    .wordsearch-words {
+      flex: 1;
+      min-width: 250px;
+      max-width: 300px;
+      background: #f8f9fa;
+      padding: 1.5rem;
+      border-radius: 8px;
+      border-left: 4px solid #2575fc;
+      align-self: flex-start;
+    }
+    
+    .wordsearch-words h4 {
+      margin-bottom: 1rem;
+      color: #2575fc;
+      font-size: 1.2rem;
+      text-align: center;
+    }
+    
+    .palabras-buscar {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    .palabras-buscar li {
+      padding: 10px 15px;
+      margin-bottom: 8px;
+      border-bottom: 1px dashed #ddd;
+      transition: all 0.3s ease;
+      font-size: 1.05rem;
+      position: relative;
+    }
+    
+    .palabras-buscar li:hover {
+      background-color: #f0f7ff;
+      border-radius: 4px;
+    }
+    
+    .palabras-buscar li.tachado {
+      text-decoration: line-through;
+      color: #888;
+      font-style: italic;
+      background-color: #f0f0f0;
+    }
+    
+    .wordsearch-board {
+      flex: 2;
+      min-width: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    
+    #wordsearch-puzzle {
+      border-collapse: collapse;
+      margin: 0 auto;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    #wordsearch-puzzle td {
+      width: 35px;
+      height: 35px;
+      text-align: center;
+      border: 1px solid #ddd;
+      font-weight: 600;
+      background: white;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      user-select: none;
+      font-size: 1.1rem;
+    }
+    
+    #wordsearch-puzzle td:hover {
+      background-color: #f0f7ff;
+    }
+    
+    #wordsearch-puzzle td.selected {
+      background-color: #ffeb3b;
+      color: #333;
+    }
+    
+    #wordsearch-puzzle td.found {
+      background-color: #4caf50;
+      color: white;
+    }
+    
+    .alert-success {
+      background-color: #d4edda;
+      color: #155724;
+      padding: 1rem;
+      border-radius: 4px;
+      margin-top: 1.5rem;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+    
+    .feedback {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: 4px;
+      text-align: center;
+      font-weight: 500;
+    }
+    
+    .feedback.success {
+      background-color: #d4edda;
+      color: #155724;
+      border-left: 4px solid #28a745;
+    }
+    
+    .feedback.error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border-left: 4px solid #dc3545;
+    }
+    
+    /* Estilos responsivos */
+    @media (max-width: 768px) {
+      .components-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .wordsearch-content {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .wordsearch-words {
+        max-width: 100%;
+      }
+      
+      #wordsearch-puzzle td {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+
+  <script>
+    // Script para la sopa de letras
+    document.addEventListener('DOMContentLoaded', function() {
+      const words = ['WIREFRAME', 'PROTOTIPO', 'NAVEGACION', 'BOTON', 'ESQUEMA', 'INTERFAZ', 'USUARIO', 'DISEÑO'];
+      const gridSize = 15;
+      let selectedCells = [];
+      let foundWords = [];
+      
+      // Crear la sopa de letras
+      const puzzle = document.getElementById('wordsearch-puzzle');
+      let grid = Array(gridSize).fill().map(() => Array(gridSize).fill(''));
+      
+      // Colocar las palabras en la grilla
+      words.forEach(word => {
+        let placed = false;
+        while (!placed) {
+          const direction = Math.floor(Math.random() * 3); // 0: horizontal, 1: vertical, 2: diagonal
+          const row = Math.floor(Math.random() * (gridSize - (direction === 1 ? word.length : 0)));
+          const col = Math.floor(Math.random() * (gridSize - (direction === 0 ? word.length : 0)));
+          
+          let canPlace = true;
+          for (let i = 0; i < word.length; i++) {
+            let r = row + (direction === 1 ? i : 0);
+            let c = col + (direction === 0 ? i : (direction === 2 ? i : 0));
+            
+            if (grid[r][c] !== '' && grid[r][c] !== word[i]) {
+              canPlace = false;
+              break;
+            }
+          }
+          
+          if (canPlace) {
+            for (let i = 0; i < word.length; i++) {
+              let r = row + (direction === 1 ? i : 0);
+              let c = col + (direction === 0 ? i : (direction === 2 ? i : 0));
+              grid[r][c] = word[i];
+            }
+            placed = true;
+          }
+        }
+      });
+      
+      // Rellenar espacios vacíos con letras aleatorias
+      const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      for (let i = 0; i < gridSize; i++) {
+        for (let j = 0; j < gridSize; j++) {
+          if (grid[i][j] === '') {
+            grid[i][j] = letters.charAt(Math.floor(Math.random() * letters.length));
+          }
+        }
+      }
+      
+      // Renderizar la grilla
+      for (let i = 0; i < gridSize; i++) {
+        const row = document.createElement('tr');
+        for (let j = 0; j < gridSize; j++) {
+          const cell = document.createElement('td');
+          cell.textContent = grid[i][j];
+          cell.dataset.row = i;
+          cell.dataset.col = j;
+          
+          cell.addEventListener('mousedown', function() {
+            if (!cell.classList.contains('found')) {
+              selectedCells = [{row: i, col: j}];
+              cell.classList.add('selected');
+            }
+          });
+          
+          cell.addEventListener('mouseover', function() {
+            if (selectedCells.length > 0 && !cell.classList.contains('found')) {
+              selectedCells.push({row: i, col: j});
+              cell.classList.add('selected');
+            }
+          });
+          
+          cell.addEventListener('mouseup', function() {
+            // Verificar automáticamente al soltar el mouse
+            verificarSeleccion();
+          });
+          
+          row.appendChild(cell);
+        }
+        puzzle.appendChild(row);
+      }
+      
+      // Evitar que se siga seleccionando si el mouse sale de la sopa
+      puzzle.addEventListener('mouseleave', function() {
+        limpiarSeleccion();
+      });
+      
+      // Función para verificar la selección automáticamente
+      function verificarSeleccion() {
+        if (selectedCells.length < 3) {
+          limpiarSeleccion();
+          return;
+        }
+        
+        // Obtener la palabra formada
+        const selectedWord = selectedCells.map(c => grid[c.row][c.col]).join('');
+        
+        // También verificar en sentido inverso
+        const reversedWord = selectedWord.split('').reverse().join('');
+        
+        if (words.includes(selectedWord) && !foundWords.includes(selectedWord)) {
+          // Palabra encontrada
+          foundWords.push(selectedWord);
+          marcarPalabraEncontrada(selectedWord);
+          showFeedback(`¡Correcto! Encontraste la palabra "${selectedWord}"`, 'success');
+        } else if (words.includes(reversedWord) && !foundWords.includes(reversedWord)) {
+          // Palabra encontrada en sentido inverso
+          foundWords.push(reversedWord);
+          marcarPalabraEncontrada(reversedWord);
+          showFeedback(`¡Correcto! Encontraste la palabra "${reversedWord}"`, 'success');
+        } else {
+          limpiarSeleccion();
+        }
+        
+        // Verificar si se encontraron todas las palabras
+        if (foundWords.length === words.length) {
+          showFeedback('¡Felicidades! Has encontrado todas las palabras', 'success');
+          // Mostrar el mensaje de finalización después de un breve retraso
+          setTimeout(mostrarMensajeFinalizado, 1000);
+        }
+      }
+      
+      // Función para marcar una palabra como encontrada
+      function marcarPalabraEncontrada(palabra) {
+        // Marcar las celdas
+        selectedCells.forEach(c => {
+          const cell = document.querySelector(`td[data-row="${c.row}"][data-col="${c.col}"]`);
+          cell.classList.remove('selected');
+          cell.classList.add('found');
+        });
+        
+        // Tachar la palabra en la lista
+        const items = document.querySelectorAll('.wordsearch-words li');
+        items.forEach(item => {
+          if (item.textContent.toUpperCase().replace(/[ÁÉÍÓÚáéíóú]/g, match => {
+            return {'Á':'A','É':'E','Í':'I','Ó':'O','Ú':'U','á':'a','é':'e','í':'i','ó':'o','ú':'u'}[match];
+          }) === palabra) {
+            item.style.textDecoration = 'line-through';
+            item.style.color = '#888';
+          }
+        });
+        
+        // Limpiar la selección
+        selectedCells = [];
+      }
+      
+      // Función para limpiar la selección
+      function limpiarSeleccion() {
+        document.querySelectorAll('td.selected').forEach(cell => {
+          cell.classList.remove('selected');
+        });
+        selectedCells = [];
+      }
+      
+      function showFeedback(message, type) {
+        const feedback = document.getElementById('wordsearch-feedback');
+        feedback.textContent = message;
+        feedback.className = 'feedback ' + type;
+        
+        // Ocultar el mensaje después de 3 segundos
+        setTimeout(() => {
+          feedback.textContent = '';
+          feedback.className = 'feedback';
+        }, 3000);
+      }
+    });
+    
+    // Scripts existentes (se mantienen igual)
+    // ...
+  </script>
+{% endblock %}
+
+  <script>
+    // Función para mostrar el mensaje de finalización
+    function mostrarMensajeFinalizado() {
+      const mensajeFinalizado = document.getElementById('mensaje-finalizado');
+      mensajeFinalizado.style.display = 'flex';
+      
+      // Crear confeti
+      const confettiContainer = document.querySelector('.confetti-container');
+      const colores = ['#f00', '#0f0', '#00f', '#ff0', '#f0f', '#0ff'];
+      
+      // Limpiar confeti existente
+      confettiContainer.innerHTML = '';
+      
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
+        confetti.style.width = (Math.random() * 10 + 5) + 'px';
+        confetti.style.height = (Math.random() * 10 + 5) + 'px';
+        confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        confetti.style.animationDelay = (Math.random() * 2) + 's';
+        confettiContainer.appendChild(confetti);
+      }
+      
+      // Cerrar el mensaje al hacer clic en cualquier parte
+      mensajeFinalizado.addEventListener('click', function() {
+        mensajeFinalizado.style.display = 'none';
+      });
+    }
+  </script>
+
+  /* Estilos para el mensaje de finalización */
+  .mensaje-finalizado {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .mensaje-contenido {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    animation: aparecer 0.5s ease-out;
+  }
+  
+  .mensaje-contenido h3 {
+    color: #2575fc;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .mensaje-contenido p {
+    color: #333;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  @keyframes aparecer {
+    from {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  .confetti-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  
+  .confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #f00;
+    opacity: 0.7;
+    animation: caer 5s linear infinite;
+  }
+  
+  @keyframes caer {
+    0% {
+      transform: translateY(-100px) rotate(0deg);
+    }
+    100% {
+      transform: translateY(500px) rotate(360deg);
+    }
+  }
+</style>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Página Didáctica{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/">
+                    <img src="{{ url_for('static', filename='images/logitoo.png') }}" alt="instancepagina_didactica" class="logo-image">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Inicio</a></li>
+                <li><a href="/teoria_color">Teoría del Color</a></li>
+                <li><a href="/gestalt">Leyes de Gestalt</a></li>
+                <li><a href="/nielsen">Principios de Nielsen</a></li>
+                <li><a href="/recoleccion">Recolección de Datos</a></li>
+                <li><a href="/wireframes">Wireframes</a></li>
+                {% if 'usuario_id' in session %}
+                    <li class="user-menu">
+                        <span>Hola, {{ session['nombre_usuario'] }} <i class="fas fa-chevron-down"></i></span>
+                        <div class="dropdown-menu">
+                            <a href="/logout" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+                        </div>
+                    </li>
+                {% else %}
+                    <li><a href="/login" class="login-btn"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</a></li>
+                    <li><a href="/register" class="register-btn"><i class="fas fa-user-plus"></i> Registrarse</a></li>
+                {% endif %}
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash-message {{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+    </header>
+    
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>🚀 Aprende Programación</h3>
+                <p>Una página didáctica para aprender conceptos de diseño de interfaces</p>
+            </div>
+            <div class="footer-section">
+                <h3>Temas</h3>
+                <ul>
+                    <li><a href="/teoria_color">Teoría del Color</a></li>
+                    <li><a href="/gestalt">Leyes de Gestalt</a></li>
+                    <li><a href="/nielsen">Principios de Nielsen</a></li>
+                    <li><a href="/recoleccion">Recolección de Datos</a></li>
+                    <li><a href="/wireframes">Wireframes</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Página Didáctica - Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <script>
+        // Menú desplegable para dispositivos móviles
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Ocultar mensajes flash después de 3 segundos
+        setTimeout(function() {
+            const flashMessages = document.querySelectorAll('.flash-message');
+            flashMessages.forEach(function(message) {
+                message.style.opacity = '0';
+                setTimeout(function() {
+                    message.style.display = 'none';
+                }, 500);
+            });
+        }, 3000);
+    </script>
+</body>
+</html>

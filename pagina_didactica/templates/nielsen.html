@@ -1,0 +1,264 @@
+{% extends "base.html" %}
+{% block title %}Principios de Nielsen{% endblock %}
+
+{% block content %}
+  <div class="topic-header nielsen-header">
+    <h2>🧠 Principios de Nielsen 🧠</h2>
+    <p>¡Descubre las 10 reglas para hacer aplicaciones fáciles de usar!</p>
+  </div>
+
+  <div class="topic-content">
+    <section class="info-section">
+      <h3>¿Qué son los Principios de Nielsen?</h3>
+      <p>Jakob Nielsen es un experto en usabilidad que creó 10 reglas importantes para hacer que las aplicaciones y sitios web sean fáciles de usar. Estas reglas nos ayudan a crear programas que todos puedan entender y disfrutar.</p>
+      
+      <div class="nielsen-intro">
+        <img src="{{ url_for('static', filename='images/nielsen_intro.png') }}" alt="Jakob Nielsen" class="nielsen-image">
+        <p>Jakob Nielsen es conocido como el "gurú de la usabilidad".</p>
+      </div>
+    </section>
+
+    <div class="nielsen-principles">
+      <section class="principle-card">
+        <div class="principle-number">1</div>
+        <h3>Visibilidad del estado del sistema</h3>
+        <p>El sistema debe informar a los usuarios sobre lo que está ocurriendo, a través de retroalimentación apropiada y en un tiempo razonable.</p>
+        <div class="principle-example">
+          <img src="{{ url_for('static', filename='images/nielsen1.png') }}" alt="Ejemplo de visibilidad">
+          <p>Ejemplo: Barras de progreso que muestran cuánto falta para completar una tarea.</p>
+        </div>
+      </section>
+
+      <section class="principle-card">
+        <div class="principle-number">2</div>
+        <h3>Relación entre el sistema y el mundo real</h3>
+        <p>El sistema debe hablar el lenguaje de los usuarios, con palabras, frases y conceptos familiares, en lugar de términos orientados al sistema.</p>
+        <div class="principle-example">
+          <img src="{{ url_for('static', filename='images/nielsen2.png') }}" alt="Ejemplo de relación">
+          <p>Ejemplo: Usar iconos de carpetas y papeles como en el mundo real.</p>
+        </div>
+      </section>
+
+      <section class="principle-card">
+        <div class="principle-number">3</div>
+        <h3>Control y libertad del usuario</h3>
+        <p>Los usuarios a menudo eligen funciones por error y necesitarán una "salida de emergencia" claramente marcada.</p>
+        <div class="principle-example">
+          <img src="{{ url_for('static', filename='images/nielsen3.png') }}" alt="Ejemplo de control">
+          <p>Ejemplo: Botones de "Deshacer" y "Cancelar" para corregir errores.</p>
+        </div>
+      </section>
+
+      <section class="principle-card">
+        <div class="principle-number">4</div>
+        <h3>Consistencia y estándares</h3>
+        <p>Los usuarios no deberían tener que preguntarse si diferentes palabras, situaciones o acciones significan lo mismo.</p>
+        <div class="principle-example">
+          <img src="{{ url_for('static', filename='images/nielsen4.png') }}" alt="Ejemplo de consistencia">
+          <p>Ejemplo: Usar los mismos colores y botones para acciones similares.</p>
+        </div>
+      </section>
+
+      <section class="principle-card">
+        <div class="principle-number">5</div>
+        <h3>Prevención de errores</h3>
+        <p>Mejor que buenos mensajes de error es un diseño cuidadoso que prevenga que ocurra un problema.</p>
+        <div class="principle-example">
+          <img src="{{ url_for('static', filename='images/nielsen5.png') }}" alt="Ejemplo de prevención">
+          <p>Ejemplo: Confirmar antes de borrar algo importante.</p>
+        </div>
+      </section>
+
+      <section class="principle-card">
+        <div class="principle-number">6</div>
+        <h3>Reconocer mejor que recordar</h3>
+        <p>Minimizar la carga de memoria del usuario haciendo visibles los objetos, acciones y opciones.</p>
+        <div class="principle-example">
+          <img src="{{ url_for('static', filename='images/nielsen6.png') }}" alt="Ejemplo de reconocimiento">
+          <p>Ejemplo: Menús con opciones visibles en lugar de comandos que hay que recordar.</p>
+        </div>
+      </section>
+
+      <section class="principle-card">
+        <div class="principle-number">7</div>
+        <h3>Flexibilidad y eficiencia de uso</h3>
+        <p>Los aceleradores pueden hacer más rápida la interacción para el usuario experto, de tal manera que el sistema puede servir tanto a los usuarios sin experiencia como con experiencia.</p>
+        <div class="principle-example">
+          <img src="{{ url_for('static', filename='images/nielsen7.png') }}" alt="Ejemplo de flexibilidad">
+          <p>Ejemplo: Atajos de teclado para usuarios avanzados.</p>
+        </div>
+      </section>
+
+      <section class="principle-card">
+        <div class="principle-number">8</div>
+        <h3>Estética y diseño minimalista</h3>
+        <p>Los diálogos no deben contener información que es irrelevante o raramente necesaria.</p>
+        <div class="principle-example">
+          <img src="{{ url_for('static', filename='images/nielsen8.png') }}" alt="Ejemplo de estética">
+          <p>Ejemplo: Interfaces limpias sin información innecesaria.</p>
+        </div>
+      </section>
+
+      <section class="principle-card">
+        <div class="principle-number">9</div>
+        <h3>Ayudar a reconocer, diagnosticar y recuperarse de los errores</h3>
+        <p>Los mensajes de error deben expresarse en lenguaje sencillo, indicar con precisión el problema y sugerir una solución.</p>
+        <div class="principle-example">
+          <img src="{{ url_for('static', filename='images/nielsen9.png') }}" alt="Ejemplo de ayuda">
+          <p>Ejemplo: Mensajes de error claros que explican qué hacer.</p>
+        </div>
+      </section>
+
+      <section class="principle-card">
+        <div class="principle-number">10</div>
+        <h3>Ayuda y documentación</h3>
+        <p>Aunque es mejor si el sistema puede ser usado sin documentación, puede ser necesario proporcionar ayuda y documentación.</p>
+        <div class="principle-example">
+          <img src="{{ url_for('static', filename='images/nielsen10.png') }}" alt="Ejemplo de documentación">
+          <p>Ejemplo: Tutoriales y guías de ayuda fáciles de entender.</p>
+        </div>
+      </section>
+    </div>
+
+    <section class="interactive-section">
+      <h3>¡Identifica los principios de Nielsen!</h3>
+      <div class="nielsen-game">
+        <div class="game-scenario">
+          <img id="scenario-image" src="{{ url_for('static', filename='images/scenario1.png') }}" alt="Escenario">
+          <p id="scenario-description">Un juego muestra una barra de progreso mientras se carga el siguiente nivel.</p>
+        </div>
+        <div class="game-question">
+          <p>¿Qué principio de Nielsen se está aplicando?</p>
+          <div class="game-options">
+            <button class="game-option" data-principle="1">Principio 1: Visibilidad</button>
+            <button class="game-option" data-principle="3">Principio 3: Control</button>
+            <button class="game-option" data-principle="5">Principio 5: Prevención</button>
+            <button class="game-option" data-principle="8">Principio 8: Estética</button>
+          </div>
+        </div>
+        <p id="game-feedback"></p>
+        <button id="next-scenario" style="display: none;">Siguiente escenario</button>
+      </div>
+    </section>
+
+    <section class="quiz-section">
+      <h3>¡Pon a prueba tus conocimientos!</h3>
+      <div class="quiz-container">
+        <div class="quiz-question">
+          <p>¿Qué principio de Nielsen se refiere a usar un lenguaje que los usuarios entiendan?</p>
+          <div class="quiz-options">
+            <button class="quiz-option" data-correct="false">Principio 1: Visibilidad</button>
+            <button class="quiz-option" data-correct="true">Principio 2: Relación con el mundo real</button>
+            <button class="quiz-option" data-correct="false">Principio 4: Consistencia</button>
+            <button class="quiz-option" data-correct="false">Principio 6: Reconocer mejor que recordar</button>
+          </div>
+          <p class="quiz-feedback"></p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Quiz functionality
+    const quizOptions = document.querySelectorAll('.quiz-option');
+    const quizFeedback = document.querySelector('.quiz-feedback');
+
+    quizOptions.forEach(option => {
+      option.addEventListener('click', function() {
+        quizOptions.forEach(btn => btn.disabled = true);
+        
+        if (this.dataset.correct === 'true') {
+          this.classList.add('correct');
+          quizFeedback.textContent = '¡Correcto! ¡Muy bien!';
+          quizFeedback.style.color = '#4CAF50';
+        } else {
+          this.classList.add('incorrect');
+          quizFeedback.textContent = 'Incorrecto. Intenta de nuevo.';
+          quizFeedback.style.color = '#F44336';
+          
+          // Highlight the correct answer
+          quizOptions.forEach(btn => {
+            if (btn.dataset.correct === 'true') {
+              btn.classList.add('correct');
+            }
+          });
+        }
+      });
+    });
+
+    // Nielsen game functionality
+    const gameOptions = document.querySelectorAll('.game-option');
+    const gameFeedback = document.getElementById('game-feedback');
+    const nextScenarioBtn = document.getElementById('next-scenario');
+    const scenarioImage = document.getElementById('scenario-image');
+    const scenarioDescription = document.getElementById('scenario-description');
+
+    // Scenarios for the game
+    const scenarios = [
+      {
+        image: 'scenario1.png',
+        description: 'Un juego muestra una barra de progreso mientras se carga el siguiente nivel.',
+        correctPrinciple: '1'
+      },
+      {
+        image: 'scenario2.png',
+        description: 'Una aplicación usa iconos de carpetas y papeles para organizar archivos.',
+        correctPrinciple: '2'
+      },
+      {
+        image: 'scenario3.png',
+        description: 'Un programa pregunta "¿Estás seguro?" antes de borrar un archivo importante.',
+        correctPrinciple: '5'
+      }
+    ];
+
+    let currentScenario = 0;
+
+    gameOptions.forEach(option => {
+      option.addEventListener('click', function() {
+        gameOptions.forEach(btn => btn.disabled = true);
+        
+        if (this.dataset.principle === scenarios[currentScenario].correctPrinciple) {
+          this.classList.add('correct');
+          gameFeedback.textContent = '¡Correcto! ¡Muy bien!';
+          gameFeedback.style.color = '#4CAF50';
+        } else {
+          this.classList.add('incorrect');
+          gameFeedback.textContent = 'Incorrecto. La respuesta correcta es el Principio ' + 
+                                    scenarios[currentScenario].correctPrinciple;
+          gameFeedback.style.color = '#F44336';
+          
+          // Highlight the correct answer
+          gameOptions.forEach(btn => {
+            if (btn.dataset.principle === scenarios[currentScenario].correctPrinciple) {
+              btn.classList.add('correct');
+            }
+          });
+        }
+        
+        if (currentScenario < scenarios.length - 1) {
+          nextScenarioBtn.style.display = 'block';
+        }
+      });
+    });
+
+    nextScenarioBtn.addEventListener('click', function() {
+      currentScenario++;
+      
+      if (currentScenario < scenarios.length) {
+        // Reset the game
+        gameOptions.forEach(btn => {
+          btn.disabled = false;
+          btn.classList.remove('correct', 'incorrect');
+        });
+        
+        gameFeedback.textContent = '';
+        nextScenarioBtn.style.display = 'none';
+        
+        // Update scenario
+        scenarioImage.src = "{{ url_for('static', filename='images/') }}" + scenarios[currentScenario].image;
+        scenarioDescription.textContent = scenarios[currentScenario].description;
+      }
+    });
+  </script>
+{% endblock %}
